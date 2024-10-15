@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디지털 노마드 라이프스타일</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            padding: 20px;
+            color: white;
+        }
+
+        .intro, .details {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.5s ease, height 0.5s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            height: auto;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>디지털 노마드</h1>
+        <p>자유롭게 일하고 여행을 즐기는 새로운 라이프스타일</p>
+    </header>
+
+    <section class="intro">
+        <h2>디지털 노마드란?</h2>
+        <p>인터넷만 있으면 어디서든 일할 수 있는 삶을 꿈꾸는 사람들.</p>
+        <button id="learnMoreBtn">더 알아보기</button>
+    </section>
+
+    <section class="details hidden">
+        <h2>디지털 노마드의 장점</h2>
+        <ul>
+            <li>언제 어디서든 일할 수 있음</li>
+            <li>새로운 장소를 여행하며 일할 수 있음</li>
+            <li>시간 관리의 자유로움</li>
+        </ul>
+        <button id="closeBtn">닫기</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 디지털 노마드 라이프스타일</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const learnMoreBtn = document.getElementById('learnMoreBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const detailsSection = document.querySelector('.details');
+
+            learnMoreBtn.addEventListener('click', function () {
+                detailsSection.classList.remove('hidden');
+                detailsSection.classList.add('visible');
+            });
+
+            closeBtn.addEventListener('click', function () {
+                detailsSection.classList.remove('visible');
+                detailsSection.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
