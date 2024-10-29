@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Rain and Snow</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.js"></script>
+<style>
+    html, body {
+        margin: 0px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #87CEEB;
+    }
+    #btn {
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        background-color: #ff69b4;
+        border: 1px solid #ff69b4;
+        border-radius: 25px;
+        text-align: center;
+        align-content: center;
+        line-height: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+    }
+    #btn:hover {
+        background-color: #ffffff;
+        color: #ff69b4;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div id="btn" onClick="clickFunc()">CHANGE!</div>
+<script>
+let particles = [];
+let isRaining = true;
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    for (let i = 0; i < 200; i++) {
+        particles.push(new Particle());
+    }
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+    background('#87CEEB');
+    for (let particle of particles) {
+        particle.update();
+        particle.display();
+    }
+}
+
+function clickFunc() {
+    isRaining = !isRaining;
+}
+
+class Particle {
+    constructor() {
+        this.x = random(width);
+        this.y = random(-height, 0);
+        this.z = random(0, 20);
+        this.len = map(this.z, 0, 20, 10, 20);
+        this.yspeed = map(this.z, 0, 20, 0.5, 2); // 기본 속도 느리게 설정
+    }
+
+    update() {
+        this.y += this.yspeed;
+        let grav = map(this.z, 0, 20, 0, 0.05); // 중력 효과 느리게 설정
+        this.yspeed += grav;
+
+        if (this.y > height) {
+            this.y = random(-200, -100);
+            this.yspeed = map(this.z, 0, 20, 0.5, 2); // 재설정 시의 속도 느리게
+        }
+    }
+
+    display() {
+        let thick = map(this.z, 0, 20, 1, 3);
+        strokeWeight(thick);
+        if (isRaining) {
+            stroke(0, 0, 139); // 비의 색깔 진한 파란색으로 설정
+            line(this.x, this.y, this.x, this.y + this.len);
+        } else {
+            noStroke();
+            fill(255);
+            ellipse(this.x, this.y, thick * 2, thick * 2);
+        }
+    }
+}
+</script>
+</body>
+</html>
